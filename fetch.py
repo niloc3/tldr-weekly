@@ -7,6 +7,9 @@ OUT.mkdir(exist_ok=True)
 today = datetime.date.today().isoformat() 
 d = feedparser.parse(RSS)
 
+print(today)
+print(e.summary.split(" ")[1])
+
 # Get today's entry
 entry = next(e for e in d.entries if today in e.summary.split(" ")[1])
 

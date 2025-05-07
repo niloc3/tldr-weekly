@@ -13,7 +13,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install deps
-        run: pip install transformers==4.40 torch==2.* requests
+        run: pip install -r ./requirements.txt
       - name: Fetch today’s issues
         run: python fetch.py
       - name: Build weekly digest
@@ -25,3 +25,9 @@ jobs:
           git add .
           git commit -m "chore: weekly digest $(date -u '+%Y-%m-%d')"
           git push
+      - name: Upload static site to Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4

@@ -7,8 +7,9 @@ OUT.mkdir(exist_ok=True)
 today = datetime.date.today().isoformat() 
 d = feedparser.parse(RSS)
 
-print(today)
+print("today: " + today)
 tmp = d.entries
+print("entries: " + tmp)
 for e in tmp:
     print(e.summary.split(" ")[1])
 

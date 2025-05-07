@@ -1,0 +1,27 @@
+name: weekly-digest
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '5 11 * * FRI'   # 07:05 ET every Friday
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: pip install transformers==4.40 torch==2.* requests
+      - name: Fetch today’s issues
+        run: python fetch.py
+      - name: Build weekly digest
+        run: python summarise.py
+      - name: Commit & push
+        run: |
+          git config user.name  github-actions
+          git config user.email actions@users.noreply.github.com
+          git add .
+          git commit -m "chore: weekly digest $(date -u '+%Y-%m-%d')"
+          git push

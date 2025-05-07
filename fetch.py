@@ -4,7 +4,7 @@ RSS = "https://tldrnewsletter.substack.com/feed"
 OUT = pathlib.Path("data")
 OUT.mkdir(exist_ok=True)
 
-today = (datetime.date.today() - datetime.timedelta(days=1)).isoformat() #
+today = datetime.date.today().isoformat() 
 d = feedparser.parse(RSS)
 
 # Get today's entry

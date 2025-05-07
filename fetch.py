@@ -8,7 +8,9 @@ today = datetime.date.today().isoformat()
 d = feedparser.parse(RSS)
 
 print(today)
-print(e.summary.split(" ")[1])
+tmp = d.entries
+for e in tmp:
+    print(e.summary.split(" ")[1])
 
 # Get today's entry
 entry = next(e for e in d.entries if today in e.summary.split(" ")[1])
